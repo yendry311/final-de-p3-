@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tienda de Computadoras</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f0f0f5;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(90deg, #ff69b4, #ff8ebd);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    .matricula {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .login-form {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #ff4ea3;
+    }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 15px;
+      width: 220px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart {
+      background: #fff;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .contact-button {
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #888;
+      font-size: 12px;
+    }
+
+    #messageBox {
+      text-align: center;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tienda de Computadoras</h1>
+    <div class="matricula">MATRICULA: 2022-0657</div>
+  </header>
+
+  <div class="container">
+    <div id="messageBox" style="display: none; padding: 10px;"></div>
+
+    <div class="login-form" id="loginForm">
+      <h2>Iniciar Sesión</h2>
+      <input type="text" id="username" placeholder="Usuario" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <br><button id="loginButton">Iniciar Sesión</button>
+    </div>
+
+    <button id="logoutButton" style="display: none;">Cerrar Sesión</button>
+
+    <div class="products" id="products" style="display: none;">
+      <!-- Productos -->
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61eQ8eN1XVL._AC_SL1500_.jpg" alt="Computadora Gamer">
+        <h3>Computadora Gamer</h3>
+        <p>Intel i7, 16GB RAM, SSD 512GB</p>
+        <p><strong>$1,200</strong></p>
+        <button onclick="addToCart('Computadora Gamer', 1200)">Añadir al Carrito</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71MlcO29QOL._AC_SL1500_.jpg" alt="Laptop Profesional">
+        <h3>Laptop Profesional</h3>
+        <p>Ryzen 5, 8GB RAM, SSD 256GB</p>
+        <p><strong>$900</strong></p>
+        <button onclick="addToCart('Laptop Profesional', 900)">Añadir al Carrito</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71UvGzYc9lL._AC_SL1500_.jpg" alt="PC Oficina">
+        <h3>PC de Oficina</h3>
+        <p>Intel i3, 4GB RAM, HDD 1TB</p>
+        <p><strong>$500</strong></p>
+        <button onclick="addToCart('PC de Oficina', 500)">Añadir al Carrito</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61E7nH4v3FL._AC_SL1500_.jpg" alt="PC Diseño">
+        <h3>PC para Diseño</h3>
+        <p>Intel i9, 32GB RAM, SSD 1TB</p>
+        <p><strong>$2,000</strong></p>
+        <button onclick="addToCart('PC para Diseño', 2000)">Añadir al Carrito</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71M+fL4btpL._AC_SL1500_.jpg" alt="PC Juegos">
+        <h3>PC para Juegos</h3>
+        <p>Ryzen 7, 16GB RAM, SSD 1TB</p>
+        <p><strong>$1,500</strong></p>
+        <button onclick="addToCart('PC para Juegos', 1500)">Añadir al Carrito</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61X-1jZtI0L._AC_SL1000_.jpg" alt="PC Básica">
+        <h3>PC Básica</h3>
+        <p>Intel Pentium, 4GB RAM, HDD 500GB</p>
+        <p><strong>$300</strong></p>
+        <button onclick="addToCart('PC Básica', 300)">Añadir al Carrito</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61o-5fJzprL._AC_SL1000_.jpg" alt="MacBook Air">
+        <h3>MacBook Air</h3>
+        <p>Apple M1, 8GB RAM, SSD 256GB</p>
+        <p><strong>$1,100</strong></p>
+        <button onclick="addToCart('MacBook Air', 1100)">Añadir al Carrito</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81WiG+bZedL._AC_SL1500_.jpg" alt="Mini PC Intel NUC">
+        <h3>Mini PC Intel NUC</h3>
+        <p>Intel i5, 8GB RAM, SSD 512GB</p>
+        <p><strong>$600</strong></p>
+        <button onclick="addToCart('Mini PC Intel NUC', 600)">Añadir al Carrito</button>
+      </div>
+    </div>
+
+    <div class="cart" id="cart" style="display: none;">
+      <h2>Carrito de Compras</h2>
+      <ul id="cartItems"></ul>
+      <p><strong>Total: $<span id="cartTotal">0</span></strong></p>
+      <button onclick="clearCart()">Vaciar Carrito</button>
+    </div>
+
+    <div style="text-align: center;">
+      <button class="contact-button" onclick="showContact()">Contacto</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Tienda de Computadoras. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const loginButton = document.getElementById('loginButton');
+    const logoutButton = document.getElementById('logoutButton');
+    const loginForm = document.getElementById('loginForm');
+    const products = document.getElementById('products');
+    const cart = document.getElementById('cart');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    const messageBox = document.getElementById('messageBox');
+    let total = 0;
+
+    function showMessage(message, type = 'info') {
+      messageBox.style.display = 'block';
+      messageBox.textContent = message;
+      messageBox.style.backgroundColor = type === 'success' ? '#d4edda' : type === 'error' ? '#f8d7da' : '#f9f9f9';
+      messageBox.style.color = type === 'success' ? '#155724' : type === 'error' ? '#721c24' : '#333';
+      setTimeout(() => { messageBox.style.display = 'none'; }, 3000);
+    }
+
+    loginButton.addEventListener('click', () => {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      if (username === "admin" && password === "1234") {
+        showMessage("Inicio de sesión exitoso", "success");
+        loginForm.style.display = "none";
+        logoutButton.style.display = "block";
+        products.style.display = "flex";
+        cart.style.display = "block";
+      } else {
+        showMessage("Usuario o contraseña incorrectos", "error");
+      }
+    });
+
+    logoutButton.addEventListener('click', () => {
+      showMessage("Sesión cerrada", "info");
+      loginForm.style.display = "block";
+      logoutButton.style.display = "none";
+      products.style.display = "none";
+      cart.style.display = "none";
+      clearCart();
+    });
+
+    function addToCart(product, price) {
+      const li = document.createElement('li');
+      li.textContent = `${product} - $${price}`;
+      const removeButton = document.createElement('button');
+      removeButton.textContent = "Eliminar";
+      removeButton.style.marginLeft = "10px";
+      removeButton.onclick = () => {
+        cartItems.removeChild(li);
+        total -= price;
+        cartTotal.textContent = total;
+        showMessage(`${product} eliminado del carrito`, "info");
+      };
+      li.appendChild(removeButton);
+      cartItems.appendChild(li);
+      total += price;
+      cartTotal.textContent = total;
+      showMessage(`${product} añadido al carrito`, "success");
+    }
+
+    function clearCart() {
+      cartItems.innerHTML = "";
+      total = 0;
+      cartTotal.textContent = total;
+      showMessage("Carrito vaciado", "info");
+    }
+
+    function showContact() {
+      showMessage("Contacto: 2022-0657", "info");
+    }
+  </script>
+</body>
+</html>
+
